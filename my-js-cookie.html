@@ -1,0 +1,61 @@
+<!--
+ * @Author: ly
+ * @Date: 2022-12-12 14:47:06
+ * @LastEditors: ly
+ * @LastEditTime: 2022-12-12 17:44:19
+ * @Description: my-js-cookie测试
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>my-js-cookie</title>
+  <!-- <script src="./my-js-cookie.js"></script> -->
+</head>
+<body>
+    <button id="buttonAdd">add</button>
+    <button id="buttonDel">del</button>
+    <button id="buttonSearch">Search</button>
+</body>
+<script type="module">
+  import Cookie from "./my-js-cookie.js"
+
+  const myCookies = Cookie.withAttributes({ expires: 2 }) // 新对象
+  // console.log(myCookies);
+  myCookies.set('test', 'test myCookies')
+
+  const myCookies1 = Cookie.withAttributes({ expires: 3 }) // 新对象
+  // console.log(myCookies1);
+
+  console.log(myCookies === Cookie);
+  // 获取元素
+  const addDocument = document.querySelector('#buttonAdd')
+  const delDocument = document.querySelector('#buttonDel')
+  const searchDocument = document.querySelector('#buttonSearch')
+
+  // 绑定事件
+  delDocument.onclick = handelDel
+  searchDocument.onclick = handelGet
+  addDocument.onclick = handelSet
+
+
+  let attributes1 = {
+    path: '/', // 路径
+    expires: 3 // 过期时间
+  }
+  function handelSet() {
+    Cookie.set("name", "liuyang", attributes1)
+  }
+  function handelGet() {
+    const cookie = Cookie.get('name')
+    console.log(cookie);
+  }
+  function handelDel() {
+    Cookie.del('name')
+  }
+</script>
+<style>
+</style>
+</html>
